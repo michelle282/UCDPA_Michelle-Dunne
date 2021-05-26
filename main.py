@@ -43,4 +43,7 @@ df1=pd.DataFrame(df2020, columns=['Team', 'Year', 'Points', 'Est Total Salary', 
 
 df2019 = {'Team':['Manchester City', 'Liverpool', 'Chelsea', 'Manchester United', 'Leicester City'], 'Year':['2019', '2019', '2019', '2019', '2019'], 'Points':['98', '97', '72', '66', '52'], 'Est Total Salary':['146m', '115m', '121m', '158m', '75m'], 'PoundsSpentPerPoint':['1.49m', '1.19m', '1.68m', '2.38m', '1.45m']}
 df2=pd.DataFrame(df2019, columns=['Team', 'Year', 'Points', 'Est Total Salary', 'PoundsSpentPerPoint'])
-print(df2.head())
+#print(df2.head())
+Team_Performance=df1.merge(df2, on='Team')
+#print(Team_Performance)
+#Team_Performance.to_csv(r'Merged_PLFF3.csv')
