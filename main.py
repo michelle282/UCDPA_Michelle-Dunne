@@ -1,20 +1,29 @@
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
 
 # Import a CSV File into a Pandas DataFrame
 Premier_League_FF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
 # print(Premier_League_FF.head())
 
 # Sort DF by Columns - Year and Finishing Position
-Premier_League_FF.sort_values(["Year", "Finishing Position"],
-                              ascending=[False, True], inplace=True)
-print(Premier_League_FF.head())
-Premier_League_FF.to_csv('PL_Sorted.csv',index=True)
+#Premier_League_FF.sort_values(["Year", "Finishing Position"],
+                              #ascending=[False, True], inplace=True)
+#print(Premier_League_FF.head())
+#Premier_League_FF.to_csv('PL_Sorted.csv',index=True)
 
-# Index DF to see first 8 columns for all teams in
-Premier_League_FF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
-Indexed = Premier_League_FF.iloc[:, :8]
-print(Indexed)
-Indexed.to_csv('IndexedPLFF.csv')
+
+# Indexing a Dataframe using Indexing Operator
+#Indexed_df2 = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv", index_col="Team")
+#Salary = Indexed_df2["Est. Total Salary"]
+#print(Salary)
+
+# Indexing - retrieving row by loc method
+#first = data.loc["Liverpool"]
+#second = data.loc["Manchester United"]
+
+#print(first, "\n\n\n", second)
 
 # Get the last entry for each team
 Grouped = Premier_League_FF.groupby('Team').last()
@@ -22,10 +31,11 @@ Grouped = Premier_League_FF.groupby('Team').last()
 # Grouped.to_csv(r'Grouped_PLFF.csv')
 
 # Drop Duplicates on Teams Column
-Drop_Duplicates = Premier_League_FF.drop_duplicates(subset=['Team'])
-# print(Drop_Duplicates)
+#Dropped_Dup = Premier_League_FF.drop_duplicates(subset=['Team'])
+#print(Dropped_Dup)
+#Dropped_Dup.to_csv(r'Dropped_PLFF.csv')
 
-
+#Itterows
 #for index, row in Premier_League_FF.iterrows():
     #print(row)
 
@@ -49,3 +59,33 @@ df2=pd.DataFrame(df2019, columns=['Team', 'Year', 'Points', 'Est Total Salary', 
 Team_Performance=df1.merge(df2, on='Team')
 #print(Team_Performance)
 #Team_Performance.to_csv(r'Merged_PLFF3.csv')
+
+#Create reusable code using Python Functions
+
+
+#Create a Numpy Array based on DF Last Entry for Each Team
+#Grouped = pd.read_csv("Grouped_PLFF.csv")
+#df = pd.DataFrame(Grouped, columns = ['Team','Year','Est. Total Salary'])
+
+#print(df)
+#print(type(df))
+#my_array = df.to_numpy()
+
+#print(my_array)
+#print(type(my_array))
+#print(my_array.dtype)
+#Access my_array using index value
+#data=my_array
+#x = data[0,2]
+#y = data[5,2]
+#print(x,y)
+
+
+#Creating a Dictionary from Pandas Dataframe in Python for all clubs with over 40 points in 2020
+PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
+PLFF2=PLFF[(PLFF.Year>2019) & (PLFF.Points>40)]
+#print(PLFF2)
+my_dictionary=PLFF2.to_dict(orient = 'list')
+#print(my_dictionary)
+
+
