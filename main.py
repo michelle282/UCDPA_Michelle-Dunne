@@ -2,6 +2,25 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import csv
+import requests
+
+#Retrieve Data from online APIs
+# API Call to Rapid API  and requesting information to be retrieved
+response = requests.get("https://live-metal-prices.p.rapidapi.com/v1/latest/XAU,XAG,PA,PL,GBP,EUR/EUR/gram",
+ headers={
+   "X-RapidAPI-Host": "live-metal-prices.p.rapidapi.com",
+   "X-RapidAPI-Key": "4ff3f73e88msh1c3bb96a95c429ep19a33djsn0b0556f92e2a"
+   }
+)
+
+unit_request = response
+unit_data = unit_request.json()
+
+#Retrieving Data from an API that looks at Gold Prices
+print(unit_data['baseCurrency'])
+print(unit_data['unit'])
+print(unit_data['rates'])
+
 
 # Import a CSV File into a Pandas DataFrame
 Premier_League_FF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
@@ -88,4 +107,45 @@ PLFF2=PLFF[(PLFF.Year>2019) & (PLFF.Points>40)]
 my_dictionary=PLFF2.to_dict(orient = 'list')
 #print(my_dictionary)
 
+#Generate Charts using Matplotlib
+#Subsetting Rows - Plot Top 5 Teams in 2020 Total Salary Expenditure
+PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
+DFF3=PLFF[(PLFF.Year>2019) & (PLFF.Points>60)]
 
+DFF3.plot(x ='Team', y='PoundsSpentPerPoint', kind = 'bar', color = 'green')
+plt.xlabel("Team", fontsize = 14, color="blue")
+plt.xticks(rotation=0)
+plt.ylabel("Pounds Spent Per Point to nearest Million", fontsize = 12, color="blue")
+plt.title('2020 Top 5 Teams - Expenditure per Point', fontsize = 12, color="blue")
+#plt.show()
+
+#Subsetting Rows - Plot Top 5 Teams in 2019 Total Salary Expenditure
+PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
+DFF4=PLFF[(PLFF.Year==2019) & (PLFF.Points>68)]
+
+DFF4.plot(x ='Team', y='PoundsSpentPerPoint', kind = 'bar', color = 'blue')
+plt.xlabel("Team", fontsize = 14, color="blue")
+plt.xticks(rotation=0, color="red")
+plt.ylabel("Pounds Spent Per Point to nearest Million", fontsize = 12, color="blue")
+plt.title('2019 Top 5 Teams - Expenditure per Point', fontsize = 12, color="blue")
+#plt.show()
+
+#Group by Year and Suming TotalSalarys
+print(PLFF.groupby('Year')['Est. Total Salary'].sum())
+df1 = PLFF.groupby('Year')['Est. Total Salary'].sum()
+df1.plot(kind='bar',x='Year',y='Est. Total Salary',color='navy')
+plt.xticks(rotation=0, color="blue")
+plt.xlabel('Season 2017 - 2020', color="purple", fontsize=14)
+plt.ylabel('Total Salary Spent per Season to nearest Billion', color="purple")
+plt.title('Total Salary Spend Year on Year', fontsize = 14, color="purple")
+#plt.show()
+
+PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
+DFF5=PLFF[(PLFF.Year>2019) & (PLFF.Points>40)]
+
+DFF5.plot(x ='Team', y='Avg Salary per player', kind = 'bar', color = 'purple', fontsize=8)
+plt.xlabel("Team", fontsize = 14, color="blue")
+plt.xticks(rotation=90)
+plt.ylabel("Avg Salary per player to nearest million", fontsize = 12, color="blue")
+plt.title('2020 Avg Salary per Player', fontsize = 14, color="blue")
+#plt.show()
