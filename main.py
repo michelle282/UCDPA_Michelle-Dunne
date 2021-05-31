@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 import requests
+import json
 
 #Retrieve Data from online APIs
 # API Call to Rapid API  and requesting information to be retrieved
@@ -80,7 +81,65 @@ Team_Performance=df1.merge(df2, on='Team')
 #Team_Performance.to_csv(r'Merged_PLFF3.csv')
 
 #Create reusable code using Python Functions
+df = data = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv", index_col ="Year")
 
+
+year17 = df.loc[2017]
+year18 = df.loc[2018]
+year19 = df.loc[2019]
+year20 = df.loc[2020]
+
+year17 = year17.sort_values(by=['Points'], ascending=False)
+year18 = year18.sort_values(by=['Points'], ascending=False)
+year19 = year19.sort_values(by=['Points'], ascending=False)
+year20 = year20.sort_values(by=['Points'], ascending=False)
+
+
+def reuseableFunction(year):
+
+#who won that year - how much did they spend, how many points
+    if year == "2017":
+        print("In 2017 the following team won the Premier League")
+        print(year17[['Team','Points','Est. Total Salary','PoundsSpentPerPoint']].head(1))
+        print(" ")
+        print("Top 5 teams(Team Name and Pounds Spent)")
+        print(year17[['Team', 'PoundsSpentPerPoint',]].head(5))
+        print(" ")
+        print("In 2017 the following team came in last in the Premier League")
+        print(year17[['Team', 'Points', 'Est. Total Salary','PoundsSpentPerPoint']].tail(1))
+
+    elif year == "2018":
+        print("In 2018 the following team won")
+        print(year18[['Team','Points','Est. Total Salary']].head(1))
+        print(" ")
+        print("Top 5 teams(Team Name and Pounds Spent)")
+        print(year18[['Team', 'PoundsSpentPerPoint', ]].head(5))
+        print(" ")
+        print("In 201 the following team came in last in the Premier League")
+        print(year18[['Team', 'Points', 'Est. Total Salary', 'PoundsSpentPerPoint']].tail(1))
+    elif year == "2019":
+        print("In 2019 the following team won")
+        print(year19[['Team','Points','Est. Total Salary']].head(1))
+        print(" ")
+        print("Top 5 teams(Team Name and Pounds Spent)")
+        print(year19[['Team', 'PoundsSpentPerPoint', ]].head(5))
+        print(" ")
+        print("In 201 the following team came in last in the Premier League")
+        print(year19[['Team', 'Points', 'Est. Total Salary', 'PoundsSpentPerPoint']].tail(1))
+    elif year == "2020":
+        print("In 2020 the following team won")
+        print(year20[['Team','Points','Est. Total Salary']].head(1))
+        print(" ")
+        print("Top 5 teams(Team Name and Pounds Spent)")
+        print(year20[['Team', 'PoundsSpentPerPoint', ]].head(5))
+        print(" ")
+        print("In 2020 the following team came in last in the Premier League")
+        print(year20[['Team', 'Points', 'Est. Total Salary', 'PoundsSpentPerPoint']].tail(1))
+    else:
+        print("No Value found - Exiting")
+
+inputYear = input("Please Enter in a Year ")
+reuseableFunction(inputYear)
 
 #Create a Numpy Array based on DF Last Entry for Each Team
 #Grouped = pd.read_csv("Grouped_PLFF.csv")
