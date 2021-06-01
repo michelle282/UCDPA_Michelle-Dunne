@@ -136,10 +136,10 @@ def reuseableFunction(year):
         print("In 2020 the following team came in last in the Premier League")
         print(year20[['Team', 'Points', 'Est. Total Salary', 'PoundsSpentPerPoint']].tail(1))
     else:
-        print("No Value found - Exiting")
+       # print("No Value found - Exiting")
 
-inputYear = input("Please Enter in a Year ")
-reuseableFunction(inputYear)
+#inputYear = input("Please Enter in a Year ")
+#reuseableFunction(inputYear)
 
 #Create a Numpy Array based on DF Last Entry for Each Team
 #Grouped = pd.read_csv("Grouped_PLFF.csv")
@@ -160,51 +160,51 @@ reuseableFunction(inputYear)
 
 
 #Creating a Dictionary from Pandas Dataframe in Python for all clubs with over 40 points in 2020
-PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
-PLFF2=PLFF[(PLFF.Year>2019) & (PLFF.Points>40)]
-#print(PLFF2)
-my_dictionary=PLFF2.to_dict(orient = 'list')
-#print(my_dictionary)
+        PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
+    PLFF2=PLFF[(PLFF.Year>2019) & (PLFF.Points>40)]
+    print(PLFF2)
+    my_dictionary=PLFF2.to_dict(orient = 'list')
+    print(my_dictionary)
 
 #Generate Charts using Matplotlib
 #Subsetting Rows - Plot Top 5 Teams in 2020 Total Salary Expenditure
 PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
 DFF3=PLFF[(PLFF.Year>2019) & (PLFF.Points>60)]
 
-DFF3.plot(x ='Team', y='PoundsSpentPerPoint', kind = 'bar', color = 'green')
-plt.xlabel("Team", fontsize = 14, color="blue")
+DFF3.plot(x ='Team', y='PoundsSpentPerPoint', kind = 'bar', color = 'cyan')
+plt.xlabel("Team", fontsize = 14, color="midnightblue")
 plt.xticks(rotation=0)
-plt.ylabel("Pounds Spent Per Point to nearest Million", fontsize = 12, color="blue")
-plt.title('2020 Top 5 Teams - Expenditure per Point', fontsize = 12, color="blue")
-#plt.show()
+plt.ylabel("Pounds Spent Per Point to nearest Million", fontsize = 12, color="midnightblue")
+plt.title('2020 Top 5 Teams - Expenditure per Point', fontsize = 12, color="midnightblue")
+plt.show()
 
 #Subsetting Rows - Plot Top 5 Teams in 2019 Total Salary Expenditure
 PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
 DFF4=PLFF[(PLFF.Year==2019) & (PLFF.Points>68)]
 
-DFF4.plot(x ='Team', y='PoundsSpentPerPoint', kind = 'bar', color = 'blue')
-plt.xlabel("Team", fontsize = 14, color="blue")
-plt.xticks(rotation=0, color="red")
-plt.ylabel("Pounds Spent Per Point to nearest Million", fontsize = 12, color="blue")
-plt.title('2019 Top 5 Teams - Expenditure per Point', fontsize = 12, color="blue")
-#plt.show()
+DFF4.plot(x ='Team', y='PoundsSpentPerPoint', kind = 'bar', color = 'teal')
+plt.xlabel("Team", fontsize = 14, color="dimgrey")
+plt.xticks(rotation=0, color="darkslategrey")
+plt.ylabel("Pounds Spent Per Point to nearest Million", fontsize = 12, color="dimgrey")
+plt.title('2019 Top 5 Teams - Expenditure per Point', fontsize = 12, color="dimgrey")
+plt.show()
 
 #Group by Year and Suming TotalSalarys
 print(PLFF.groupby('Year')['Est. Total Salary'].sum())
 df1 = PLFF.groupby('Year')['Est. Total Salary'].sum()
-df1.plot(kind='bar',x='Year',y='Est. Total Salary',color='navy')
+df1.plot(kind='bar',x='Year',y='Est. Total Salary',color='maroon')
 plt.xticks(rotation=0, color="blue")
-plt.xlabel('Season 2017 - 2020', color="purple", fontsize=14)
-plt.ylabel('Total Salary Spent per Season to nearest Billion', color="purple")
-plt.title('Total Salary Spend Year on Year', fontsize = 14, color="purple")
-#plt.show()
+plt.xlabel('Season 2017 - 2020', color="darkred", fontsize=14)
+plt.ylabel('Total Salary Spent per Season to nearest Billion', color="darkred")
+plt.title('Total Salary Spend Year on Year', fontsize = 14, color="darkred")
+plt.show()
 
 PLFF = pd.read_csv("Premier League - Football and Financial Performance - 2017 - 2020.csv")
 DFF5=PLFF[(PLFF.Year>2019) & (PLFF.Points>40)]
 
-DFF5.plot(x ='Team', y='Avg Salary per player', kind = 'bar', color = 'purple', fontsize=8)
-plt.xlabel("Team", fontsize = 14, color="blue")
+DFF5.plot(x ='Team', y='Avg Salary per player', kind = 'bar', color = 'lightslategrey', fontsize=8)
+plt.xlabel("Team", fontsize = 14, color="maroon")
 plt.xticks(rotation=90)
-plt.ylabel("Avg Salary per player to nearest million", fontsize = 12, color="blue")
-plt.title('2020 Avg Salary per Player', fontsize = 14, color="blue")
+plt.ylabel("Avg Salary per player to nearest million", fontsize = 12, color="maroon")
+plt.title('2020 Avg Salary per Player', fontsize = 14, color="maroon")
 #plt.show()
