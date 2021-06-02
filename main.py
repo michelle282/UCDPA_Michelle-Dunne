@@ -21,9 +21,12 @@ unit_data = unit_request.json()
 #There is a limitation on the number of calls per minute/per month -
 # if response is showing 429 it means too many calls
 print(response)
-#print(unit_data['baseCurrency'])
-#print(unit_data['unit'])
-#print(unit_data['rates'])
+if response == "Response [429]":
+    print(unit_data['baseCurrency'])
+    print(unit_data['unit'])
+    print(unit_data['rates'])
+else:
+    print("Can't run code too many requests")
 
 
 # Import a CSV File into a Pandas DataFrame
